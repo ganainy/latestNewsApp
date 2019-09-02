@@ -2,6 +2,7 @@ package com.example.retrofittest;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -12,6 +13,7 @@ import java.util.Locale;
 import java.util.Random;
 
 public class Utils {
+    private static final String TAG = "Utils";
     public static ColorDrawable[] vibrantLightColorList =
             {
                     new ColorDrawable(Color.parseColor("#ffeead")),
@@ -61,6 +63,7 @@ public class Utils {
     public static String getCountry(){
         Locale locale = Locale.getDefault();
         String country = String.valueOf(locale.getCountry());
+        Log.i(TAG, "getCountry: "+country);
         return country.toLowerCase();
     }
 }
