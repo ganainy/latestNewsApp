@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final String API_KEY = "b95e55b9676a4817a9e8969ada077731";
+    private NewsAdapter newsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 
 
     private void loadArticles(final String keyword)
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
-        NewsAdapter newsAdapter=new NewsAdapter(this,articleList);
+         newsAdapter=new NewsAdapter(this,articleList);
         recyclerView.setAdapter(newsAdapter);
     }
 

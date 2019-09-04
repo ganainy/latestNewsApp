@@ -1,6 +1,7 @@
 package com.example.retrofittest.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.retrofittest.R;
 import com.example.retrofittest.Utils;
+import com.example.retrofittest.activity.MainActivity;
+import com.example.retrofittest.activity.NewsDetailActivity;
 import com.example.retrofittest.model.Article;
 
 import java.util.List;
@@ -133,6 +136,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(context, NewsDetailActivity.class);
+                    Article article=articleList.get(getAdapterPosition());
+                    intent.putExtra("url",article.getUrl());
+                    intent.putExtra("title",article.getTitle());
+                    intent.putExtra("img",article.getUrlToImage());
+                    intent.putExtra("date",article.getPublishedAt());
+                    intent.putExtra("source",article.getSource().getName());
+                    intent.putExtra("author",article.getAuthor());
+
+                    MainActivity mainActivity=(MainActivity) context;
+                    mainActivity.startActivity(intent);
+                }
+            });
+
         }
     }
 }
