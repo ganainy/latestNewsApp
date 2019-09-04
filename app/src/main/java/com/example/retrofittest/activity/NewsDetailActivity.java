@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,19 +23,15 @@ import com.example.retrofittest.Utils;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NewsDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
-
+    private static final String TAG = "NewsDetailActivity";
    private ImageView imageView;
    private TextView appbar_title,appbar_subtitle,date,time,title;
-   private boolean isHideTollbarView =false;
    private FrameLayout date_behaviour;
    private LinearLayout titleAppbar;
    private AppBarLayout appBarLayout;
    private Toolbar toolbar;
-   private String mUrl,mImg,mTitle,mDate,mSource,mAuthor;
 
 
     @Override
@@ -48,7 +46,6 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
         final CollapsingToolbarLayout collapsingToolbarLayout=findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("");
-
 
         appBarLayout=findViewById(R.id.appbar);
         appBarLayout.addOnOffsetChangedListener(this) ;
@@ -72,7 +69,7 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         Intent intent = getIntent();
         String mUrl = intent.getStringExtra("url");
         String mTitle = intent.getStringExtra("title");
-        String mImage = intent.getStringExtra("image");
+        String mImage = intent.getStringExtra("img");
         String mDate = intent.getStringExtra("date");
         String mSource = intent.getStringExtra("source");
         String mAuthor = intent.getStringExtra("author");
@@ -81,7 +78,7 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
         requestOptions.error(Utils.getRandomDrawbleColor());
         Glide.with(this).load(mImage).apply(requestOptions).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
 
-
+            //check those sets
         appbar_title.setText(mSource);
         appbar_subtitle.setText(mUrl);
         date.setText(Utils.DateFormat(mDate));
@@ -129,19 +126,19 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+        Log.i(TAG, "onOffsetChanged: medhat shalaby"+i);
         int maxScroll=appBarLayout.getTotalScrollRange();
         float percentage= (float)Math.abs(i)/ (float)maxScroll;
-        if(percentage==1f&& isHideTollbarView)
+
+        appBarLayout.setBackgroundColor(Color.parseColor("#e04050"));
+        if(percentage==1f)
         {
-            date_behaviour.setVisibility(View.GONE);
-            titleAppbar.setVisibility(View.VISIBLE);
-            isHideTollbarView=!isHideTollbarView;
-        }
-        else if (percentage<1f&& isHideTollbarView)
+            Log.i(TAG, "onOffsetChanged: medhat shalaby gamed");
+
+            date_behaviour.setVisibility(View.INVISIBLE);
+        }else
         {
             date_behaviour.setVisibility(View.VISIBLE);
-            titleAppbar.setVisibility(View.GONE);
-            isHideTollbarView=!isHideTollbarView;
         }
     }
 }

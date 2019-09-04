@@ -14,12 +14,13 @@
         android:layout_height="250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/MyAppBarLayoutTheme">
-
+<!--app:layout_scrollFlags=  how collapsing toolbar reacts to swiping up-->
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll"
             >
 
             <ImageView
@@ -56,7 +57,7 @@
                     android:layout_height="80dp" />
 
             </RelativeLayout>
-
+<!--popupTheme gives theme to menu if iam inflating one in toolbar-->
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -105,8 +106,10 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-
+<!-- app:layout_behavior="@string/appbar_scrolling_view_behavior" so nestedscroll view starts with
+end of collapse toolbar-->
     <androidx.core.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:background="@color/colorBackground"
@@ -114,11 +117,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                app:cardCornerRadius="0dp"
                 app:cardElevation="@dimen/cardview_default_elevation"
                 android:layout_height="wrap_content">
                 <RelativeLayout
@@ -186,7 +188,7 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
+<!--anchor , anchor gravity so this layout moves with the appbar layout-->
     <FrameLayout
         android:id="@+id/date_behavior"
         app:layout_anchor="@+id/appbar"
