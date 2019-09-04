@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<Article> articleList=new ArrayList<>();
@@ -47,11 +47,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_main);
 
         swipeRefreshLayout=findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        /*attatching listener to listen for swipe gesture*/
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadArticles("");
+
+            }
+        });
+        /*color of loading circle*/
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
 
 
-       onLoadingSwipeRefresh("");
+       loadArticles("");
         /*todo
         * 2-check connection on start
         * 4-continue videos list
@@ -114,17 +122,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.main_menu,menu);
-        SearchManager searchManager= (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+          /*getActionView()
+        Returns the currently set action view for this menu item.
+        next line +   app:actionViewClass="android.widget.SearchView"
+        is telling app that i want that menu item to act as SearchView
+        */
         final SearchView searchView= (SearchView) menu.findItem(R.id.action_search).getActionView();
-        MenuItem searchMenu=menu.findItem(R.id.action_search);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setQueryHint("Find something specific?");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 if(s.length()>2)
                 {
-                    onLoadingSwipeRefresh(s);
+                    loadArticles(s);
                 }else
                 {
                     Toast.makeText(MainActivity.this, "Need more than two letters for accurate search", Toast.LENGTH_SHORT).show();
@@ -138,26 +148,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        searchMenu.getIcon().setVisible(false,false);
 
             return true;
 
     }
 
 
-    //swipe refresh layout
-    @Override
-    public void onRefresh() {
-        loadArticles("");
-    }
 
-    private void onLoadingSwipeRefresh(final String keyword)
-    {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                loadArticles(keyword);
-            }
-        });
-    }
+
 }
