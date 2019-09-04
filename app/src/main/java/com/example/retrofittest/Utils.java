@@ -68,4 +68,10 @@ public class Utils {
         Log.i(TAG, "getCountry: "+country);
         return country.toLowerCase();
     }
+
+    public static String getLanguage() {
+        Locale locale = Locale.getDefault();
+        String language = locale.getLanguage();
+        return language;
+    }
 }
