@@ -2,10 +2,10 @@ package com.example.retrofittest.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,7 +25,6 @@ import com.bumptech.glide.request.target.Target;
 import com.example.retrofittest.R;
 import com.example.retrofittest.Utils;
 import com.example.retrofittest.model.Article;
-import com.example.retrofittest.model.News;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
-
+    private static final String TAG = "NewsAdapter";
     List<Article> articleList;
     private Context context;
 
@@ -77,16 +76,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             }
         }).transition(DrawableTransitionOptions.withCrossFade()).into(holder.img);
 
-        /*load date to rest of views*/
-        holder.source.setText(currentArticle.getSource().getName()+"  ");
+        /*load data to rest of views*/
+        holder.source.setText(currentArticle.getSource().getName());
         holder.desc.setText(currentArticle.getDescription());
         holder.title.setText(currentArticle.getTitle());
-        holder.time.setText(Utils.DateToTimeFormat(currentArticle.getPublishedAt()));
+        holder.time.setText("\u2022"+Utils.DateToTimeFormat(currentArticle.getPublishedAt()));
+        Log.i(TAG, "onBindViewHolder: "+currentArticle.getPublishedAt());
         holder.date_main.setText(Utils.DateFormat(currentArticle.getPublishedAt()));
         /*don't show textview if author if it returns null from server*/
-        if (currentArticle.getAuthor()!=null)
+        Log.i(TAG, "onBindViewHolder: "+currentArticle.getAuthor());
+        if (currentArticle.getAuthor()!=null && currentArticle.getAuthor().length()<16)
         {
-            holder.author.setText("By: "+currentArticle.getAuthor());
+            holder.author.setText(currentArticle.getAuthor());
 
         }
 

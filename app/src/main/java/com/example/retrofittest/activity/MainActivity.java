@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.retrofittest.R;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         loadArticles();
+        /*todo
+        * 2-check connection on start
+        * 4-continue videos list
+        * */
 
 
     }
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         String country= Utils.getCountry();
         Call<News> newsCall;
-        newsCall=getNewsDataService.getNews(country,API_KEY);
+        newsCall=getNewsDataService.getNews(country,"sports",API_KEY);
 
         newsCall.enqueue(new Callback<News>() {
             @Override
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-
+                Log.i(TAG, "onFailure: "+t.getMessage());
             }
         });
     }
@@ -80,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         NewsAdapter newsAdapter=new NewsAdapter(this,articleList);
         recyclerView.setAdapter(newsAdapter);
     }

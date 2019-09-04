@@ -11,6 +11,7 @@ public interface GetNewsDataService {
     Call<News> getNews(
 
             @Query("country") String country,
+            @Query("category") String category,
             @Query("apiKey") String apiKey
 
     );

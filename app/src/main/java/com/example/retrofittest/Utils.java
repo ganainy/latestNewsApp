@@ -32,13 +32,14 @@ public class Utils {
     }
 
     public static String DateToTimeFormat(String oldstringDate){
-        PrettyTime p = new PrettyTime(new Locale(getCountry()));
+        PrettyTime prettyTime = new PrettyTime();
         String isTime = null;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
-                    Locale.ENGLISH);
+            /*parse coming string to date then use pretty time to change it for example 3 hours ago*/
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"
+                   );
             Date date = sdf.parse(oldstringDate);
-            isTime = p.format(date);
+            isTime = prettyTime.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -48,7 +49,8 @@ public class Utils {
 
     public static String DateFormat(String oldstringDate){
         String newDate;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy", new Locale(getCountry()));
+        /*receive old date from server then parse it as date then format it "E, d MMM yyyy" */
+        SimpleDateFormat dateFormat = new SimpleDateFormat("E, d MMM yyyy");
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldstringDate);
             newDate = dateFormat.format(date);
@@ -62,7 +64,7 @@ public class Utils {
 
     public static String getCountry(){
         Locale locale = Locale.getDefault();
-        String country = String.valueOf(locale.getCountry());
+        String country = locale.getCountry();
         Log.i(TAG, "getCountry: "+country);
         return country.toLowerCase();
     }
