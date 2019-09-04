@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -31,10 +32,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     RecyclerView recyclerView;
     List<Article> articleList=new ArrayList<>();
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final String TAG = "MainActivity";
     private static final String API_KEY = "b95e55b9676a4817a9e8969ada077731";
@@ -44,9 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout=findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
 
-        loadArticles("");
+       onLoadingSwipeRefresh("");
         /*todo
         * 2-check connection on start
         * 4-continue videos list
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadArticles(final String keyword)
     {
+        swipeRefreshLayout.setRefreshing(true);
         GetNewsDataService getNewsDataService= RetrofitInstance.getRetrofitInstance().
                 create(GetNewsDataService.class);
         String country= Utils.getCountry();
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<News> call, Response<News> response) {
                 if(response.isSuccessful() && response.body().getArticles().size()>0)
                 {
+                    swipeRefreshLayout.setRefreshing(false);
                     Log.i(TAG, "onResponse:isSuccessful ");
                     articleList.clear();
                     articleList=response.body().getArticles();
@@ -80,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }else
                 {
+                    swipeRefreshLayout.setRefreshing(false);
                     Log.i(TAG, "onResponse: No results!");
                     Toast.makeText(MainActivity.this, "No results!", Toast.LENGTH_SHORT).show();
                 }
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
                 Log.i(TAG, "onResponse: Failure: "+t.getMessage());
             }
         });
@@ -115,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 if(s.length()>2)
                 {
-                    loadArticles(s);
+                    onLoadingSwipeRefresh(s);
                 }else
                 {
-                    Toast.makeText(MainActivity.this, "Entered word is very short", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Need more than two letters for accurate search", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -133,5 +142,22 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
 
+    }
+
+
+    //swipe refresh layout
+    @Override
+    public void onRefresh() {
+        loadArticles("");
+    }
+
+    private void onLoadingSwipeRefresh(final String keyword)
+    {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                loadArticles(keyword);
+            }
+        });
     }
 }
