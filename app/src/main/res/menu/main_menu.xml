@@ -8,6 +8,7 @@
     once i add this line this item will work as searchview and get a search icon even if i don't add it
     -->
     <item
+        android:icon="@android:drawable/ic_menu_search"
         android:id="@+id/action_search"
         android:title="Search"
         app:showAsAction="always"
@@ -15,10 +16,6 @@
         android:theme="@android:style/Theme.Holo.Light"
         ></item>
 
-    <item
-        android:id="@+id/action_settings"
-        android:title="Settings"
-        app:showAsAction="never"
-        ></item>
+
 
 </menu>

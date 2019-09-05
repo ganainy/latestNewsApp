@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">أخر الاخبار</string>
+    <string name="news_for_you">أخبار لك</string>
+    <string name="subtitle">تفاصيل</string>
+    <string name="title_of_news">عنوان الخبر</string>
+    <string name="a_time_ago">منذ فتره</string>
+    <string name="_01_january_1990">01 يناير 1990</string>
+    <string name="error_message">رساله خطأ</string>
+    <string name="retry">أعد المحاولة</string>
+    <string name="error_title">عنوان خطأ</string>
+    <string name="not_found">404 غير موجود</string>
+    <string name="server_broken">500 الخادم معطل</string>
+    <string name="unknow_error">خطأ غير معروف</string>
+    <string name="no_results">لا توجد نتائج</string>
+    <string name="check_connection">تأكد من اتصال الانترنت واعد المحاولة</string>
+    <string name="network_issue">مشكلة بالانترنت</string>
+    <string name="Find">ابحث عن شىء معين...</string>
+    <string name="need_more_than_two_chars">ادخل اكثر من حرفين حتى يكون البحث دقيق</string>
+    <string name="top_headlines">أهم الاخبار</string>
+</resources>

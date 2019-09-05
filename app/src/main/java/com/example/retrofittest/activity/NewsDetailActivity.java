@@ -126,14 +126,12 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-        Log.i(TAG, "onOffsetChanged: medhat shalaby"+i);
         int maxScroll=appBarLayout.getTotalScrollRange();
         float percentage= (float)Math.abs(i)/ (float)maxScroll;
 
         appBarLayout.setBackgroundColor(Color.parseColor("#e04050"));
         if(percentage==1f)
         {
-            Log.i(TAG, "onOffsetChanged: medhat shalaby gamed");
 
             date_behaviour.setVisibility(View.INVISIBLE);
         }else

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
  >
-
+<!--toolbar inside collapsing action bar inside appbarlayout-->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                     <TextView
                         android:id="@+id/title_on_appbar"
                         style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
-                        android:text="News for you"
+                        android:text="@string/news_for_you"
                         android:textSize="18dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                     <TextView
                         android:id="@+id/subtitle_on_appbar"
                         style="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-                        android:text="Subtitle"
+                        android:text="@string/subtitle"
                         android:textSize="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@ end of collapse toolbar-->
                         android:textStyle="bold"
                         android:fontFamily="sans-serif-light"
                         android:textSize="19sp"
-                        android:text="Title of News"
+                        android:text="@string/title_of_news"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -151,7 +151,7 @@ end of collapse toolbar-->
                         android:drawablePadding="10dp"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:text="a time ago" />
+                        android:text="@string/a_time_ago" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -216,7 +216,7 @@ end of collapse toolbar-->
             android:id="@+id/date"
             android:layout_marginLeft="27dp"
             android:layout_marginRight="10dp"
-            android:text="01 January 1990"
+            android:text="@string/_01_january_1990"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </FrameLayout>

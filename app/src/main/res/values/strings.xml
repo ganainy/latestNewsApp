@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Latest News</string>
+    <string name="news_for_you">News for you</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="title_of_news">Title of News</string>
+    <string name="a_time_ago">a time ago</string>
+    <string name="_01_january_1990">01 January 1990</string>
+    <string name="error_message">Error message</string>
+    <string name="retry">Retry</string>
+    <string name="error_title">Error title</string>
+    <string name="not_found">404 not found</string>
+    <string name="server_broken">500 server broken</string>
+    <string name="unknow_error">unknown error</string>
+    <string name="no_results">No results</string>
+    <string name="check_connection">Check your connection and try again</string>
+    <string name="network_issue">Network issue</string>
+    <string name="Find">Find something specific?</string>
+    <string name="need_more_than_two_chars">Need more than two letters for accurate search</string>
+    <string name="top_headlines">Top headlines</string>
 </resources>

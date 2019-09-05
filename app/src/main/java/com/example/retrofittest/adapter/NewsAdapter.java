@@ -3,6 +3,7 @@ package com.example.retrofittest.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -141,6 +145,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    ImageView imageView=itemView.findViewById(R.id.img);
+
+
                     Intent intent=new Intent(context, NewsDetailActivity.class);
                     Article article=articleList.get(getAdapterPosition());
                     intent.putExtra("url",article.getUrl());
@@ -152,6 +160,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
                     MainActivity mainActivity=(MainActivity) context;
                     mainActivity.startActivity(intent);
+
                 }
             });
 

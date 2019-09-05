@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Top headlines"
+            android:text="@string/top_headlines"
             android:fontFamily="sans-serif-light"
             android:textSize="16sp"
             android:layout_marginHorizontal="16dp"
@@ -49,5 +49,9 @@
 
 </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/network_error">
+
+    </include>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

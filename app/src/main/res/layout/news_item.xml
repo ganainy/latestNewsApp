@@ -53,7 +53,7 @@
                 android:layout_alignTop="@+id/layout_date"
                 android:ellipsize="end"
                 android:maxLines="1"
-                tools:text="author_name"
+                tools:text="author name"
                 android:textColor="@color/white" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
