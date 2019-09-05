@@ -86,7 +86,6 @@ public class NewsDetailActivity extends AppCompatActivity implements AppBarLayou
 
         String author = "";
         if (mAuthor != null || mAuthor != "") {
-            //todo error here i guess
             author = " \u2022 " + mAuthor;
         }
 

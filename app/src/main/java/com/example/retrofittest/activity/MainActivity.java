@@ -69,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /*todo
-         * 2-check connection on start
-         * 4-continue videos list
-         * */
+
         errorLayout = findViewById(R.id.errorLayout);
         errorTitle = findViewById(R.id.errorTitle);
         errorMessage = findViewById(R.id.errorMessage);
